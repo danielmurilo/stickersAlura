@@ -13,7 +13,8 @@ public class App {
 
         //http connection to tmdb api - The Movie Database
         //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/NASA-APOD.json";
+        
         URI adress = URI.create(url);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(adress).GET().build();
@@ -22,13 +23,13 @@ public class App {
 
         //extracting data 
         var parser = new JsonParser();
-        List<Map<String, String>> moviesList = parser.parse(body);
+        List<Map<String, String>> contentList = parser.parse(body);
         
 
-        //showing data
-        for (Map<String,String> movie : moviesList) {
-            InputStream is = new URL(movie.get("url")).openStream();
-            new StickersGenerator().readImg(is, movie.get("title"));
+        //generating image
+        for (Map<String,String> content : contentList) {
+            InputStream is = new URL(content.get("url")).openStream();
+            new StickersGenerator().readImg(is, content.get("title"));
             
         }
     }
