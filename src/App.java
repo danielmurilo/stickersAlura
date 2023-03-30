@@ -12,6 +12,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //http connection to tmdb api - The Movie Database
+        //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
         String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
         URI adress = URI.create(url);
         var client = HttpClient.newHttpClient();
@@ -26,7 +27,7 @@ public class App {
 
         //showing data
         for (Map<String,String> movie : moviesList) {
-            InputStream is = new URL(movie.get("image")).openStream();
+            InputStream is = new URL(movie.get("url")).openStream();
             new StickersGenerator().readImg(is, movie.get("title"));
             
         }
